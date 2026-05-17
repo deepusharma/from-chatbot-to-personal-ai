@@ -152,19 +152,6 @@ test-bed: Obsidian vault (same vault, same queries as Setup-A)
 
 ---
 
-## LinkedIn Post
-
-<!-- Short feed post driving to the Medium Article. Target ~200 words.
-     Publish same day as the Medium Article.
-     Main author publishes and tags the other two co-authors.
-     Co-authors each repost with 3–4 bullets of their own take.
-
-     WRITE: 3–5 specific observations from the setup — what was surprising,
-     what differed from the docs, what a builder would want to know first.
-     Not "we set up X." End with "Full setup notes on Medium [link]." -->
-
----
-
 ## Three Takes
 
 <!-- 2–3 sentences per co-author in their own voice.
@@ -177,3 +164,16 @@ test-bed: Obsidian vault (same vault, same queries as Setup-A)
 **[Author B]:**
 
 **[Author C]:**
+
+---
+
+## LinkedIn Post
+
+<!-- Short feed post driving to the Medium Article. Target ~200 words.
+     Publish same day as the Medium Article.
+     Main author publishes and tags the other two co-authors.
+     Co-authors each repost with 3–4 bullets of their own take.
+
+     WRITE: 3–5 specific observations from the setup — what was surprising,
+     what differed from the docs, what a builder would want to know first.
+     Not "we set up X." End with "Full setup notes on Medium [link]." -->

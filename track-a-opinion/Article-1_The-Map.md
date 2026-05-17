@@ -118,19 +118,6 @@ track-b-link: none (no setup for this article)
 
 ---
 
-## LinkedIn Post
-
-<!-- Short feed post promoting the LinkedIn Article. Target ~200 words.
-     Publish same day as the LinkedIn Article.
-     Main author publishes and tags the other two co-authors.
-     Co-authors each repost with 3–4 bullets of their own take.
-
-     WRITE: Open with the single strongest insight from the article (1–2 sentences).
-     One or two supporting lines. End with "Full article linked." No summary,
-     no "I just published" opener. Get to the substance on line one. -->
-
----
-
 ## Three Takes
 
 <!-- 2–3 sentences per co-author in their own voice.
@@ -143,3 +130,16 @@ track-b-link: none (no setup for this article)
 **[Author B]:**
 
 **[Author C]:**
+
+---
+
+## LinkedIn Post
+
+<!-- Short feed post promoting the LinkedIn Article. Target ~200 words.
+     Publish same day as the LinkedIn Article.
+     Main author publishes and tags the other two co-authors.
+     Co-authors each repost with 3–4 bullets of their own take.
+
+     WRITE: Open with the single strongest insight from the article (1–2 sentences).
+     One or two supporting lines. End with "Full article linked." No summary,
+     no "I just published" opener. Get to the substance on line one. -->
