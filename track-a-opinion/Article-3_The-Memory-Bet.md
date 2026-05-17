@@ -5,8 +5,9 @@ track: A
 status: placeholder
 author: TBD
 word-target: 700-1000
-platform-primary: LinkedIn
-platform-secondary: Medium
+linkedin-article: primary
+medium-article: cross-post-7d
+linkedin-post: true
 track-b-link: "../track-b-receipts/Setup-D_memU.md"
 ---
 
@@ -99,3 +100,48 @@ track-b-link: "../track-b-receipts/Setup-D_memU.md"
 ---
 
 *Status: Placeholder. Replace this line when drafting begins.*
+
+---
+
+## LinkedIn Article
+
+<!-- PRIMARY PUBLISH — Track A publishes on LinkedIn first.
+     The article body above is the draft for this.
+     When ready: paste the full content above into a new LinkedIn Article.
+     Add the published URL to frontmatter once live. -->
+
+---
+
+## Medium Article
+
+<!-- CROSS-POST — same content as the LinkedIn Article above.
+     Add as the opening line: "Originally published on LinkedIn at [URL]."
+     Publish 7 days after the LinkedIn Article. -->
+
+---
+
+## LinkedIn Post
+
+<!-- Short feed post promoting the LinkedIn Article. Target ~200 words.
+     Publish same day as the LinkedIn Article.
+     Main author publishes and tags the other two co-authors.
+     Co-authors each repost with 3–4 bullets of their own take.
+
+     WRITE: Open with the single strongest insight from the article (1–2 sentences).
+     One or two supporting lines. End with "Full article linked." No summary,
+     no "I just published" opener. Get to the substance on line one. -->
+
+---
+
+## Three Takes
+
+<!-- 2–3 sentences per co-author in their own voice.
+     Anchor question: "What I kept thinking about after writing this."
+     First-person is fine here. Voice rules still apply: no em dashes,
+     no rhetorical questions, specific over generic. -->
+
+**[Author A]:**
+
+**[Author B]:**
+
+**[Author C]:**

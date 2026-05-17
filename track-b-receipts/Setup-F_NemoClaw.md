@@ -6,7 +6,9 @@ tool: NemoClaw
 status: placeholder
 author: TBD
 word-target: 1500-2000
-platform-primary: Medium
+medium-article: primary
+linkedin-article: cross-post-7d
+linkedin-post: true
 track-a-link: "../track-a-opinion/Article-4_The-Lock-In-Question.md"
 test-bed: NVIDIA API catalog (Nemotron model). DGX architecture via documentation.
 transparency-note: Full NemoClaw stack (OpenShell sandboxing, audit trails) requires DGX hardware not available for this setup. This post covers the NVIDIA API path and architecture analysis only. Be explicit about this throughout.
@@ -151,3 +153,48 @@ transparency-note: Full NemoClaw stack (OpenShell sandboxing, audit trails) requ
 ---
 
 *Status: Placeholder. Replace this line when drafting begins.*
+
+---
+
+## Medium Article
+
+<!-- PRIMARY PUBLISH — Track B publishes on Medium first.
+     The article body above is the draft for this.
+     When ready: submit to the series Medium Publication.
+     Add the published URL to frontmatter once live. -->
+
+---
+
+## LinkedIn Article
+
+<!-- CROSS-POST — same content as the Medium Article above.
+     Add as the opening line: "Originally published on Medium at [URL]."
+     Publish 7 days after the Medium Article. -->
+
+---
+
+## LinkedIn Post
+
+<!-- Short feed post driving to the Medium Article. Target ~200 words.
+     Publish same day as the Medium Article.
+     Main author publishes and tags the other two co-authors.
+     Co-authors each repost with 3–4 bullets of their own take.
+
+     WRITE: 3–5 specific observations from the setup — what was surprising,
+     what differed from the docs, what a builder would want to know first.
+     Not "we set up X." End with "Full setup notes on Medium [link]." -->
+
+---
+
+## Three Takes
+
+<!-- 2–3 sentences per co-author in their own voice.
+     Anchor question: "What surprised me most about this tool."
+     First-person is fine here. Voice rules still apply: no em dashes,
+     no rhetorical questions, specific over generic. -->
+
+**[Author A]:**
+
+**[Author B]:**
+
+**[Author C]:**
