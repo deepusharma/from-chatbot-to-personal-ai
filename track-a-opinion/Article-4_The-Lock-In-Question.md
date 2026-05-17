@@ -5,9 +5,8 @@ track: A
 status: placeholder
 author: TBD
 word-target: 800-1000
-linkedin-article: primary
-medium-article: cross-post-7d
-linkedin-post: true
+publishes-first: linkedin
+cross-post: medium (7 days after)
 track-b-link: "../track-b-receipts/Setup-F_NemoClaw.md"
 transparency-note: "Hands-on via NVIDIA API catalog only. DGX architecture covered via documentation."
 ---
@@ -112,23 +111,6 @@ transparency-note: "Hands-on via NVIDIA API catalog only. DGX architecture cover
 ---
 
 *Status: Placeholder. Replace this line when drafting begins.*
-
----
-
-## LinkedIn Article
-
-<!-- PRIMARY PUBLISH — Track A publishes on LinkedIn first.
-     The article body above is the draft for this.
-     When ready: paste the full content above into a new LinkedIn Article.
-     Add the published URL to frontmatter once live. -->
-
----
-
-## Medium Article
-
-<!-- CROSS-POST — same content as the LinkedIn Article above.
-     Add as the opening line: "Originally published on LinkedIn at [URL]."
-     Publish 7 days after the LinkedIn Article. -->
 
 ---
 

@@ -6,9 +6,8 @@ tool: NemoClaw
 status: placeholder
 author: TBD
 word-target: 1500-2000
-medium-article: primary
-linkedin-article: cross-post-7d
-linkedin-post: true
+publishes-first: medium
+cross-post: linkedin (7 days after)
 track-a-link: "../track-a-opinion/Article-4_The-Lock-In-Question.md"
 test-bed: NVIDIA API catalog (Nemotron model). DGX architecture via documentation.
 transparency-note: Full NemoClaw stack (OpenShell sandboxing, audit trails) requires DGX hardware not available for this setup. This post covers the NVIDIA API path and architecture analysis only. Be explicit about this throughout.
@@ -153,23 +152,6 @@ transparency-note: Full NemoClaw stack (OpenShell sandboxing, audit trails) requ
 ---
 
 *Status: Placeholder. Replace this line when drafting begins.*
-
----
-
-## Medium Article
-
-<!-- PRIMARY PUBLISH — Track B publishes on Medium first.
-     The article body above is the draft for this.
-     When ready: submit to the series Medium Publication.
-     Add the published URL to frontmatter once live. -->
-
----
-
-## LinkedIn Article
-
-<!-- CROSS-POST — same content as the Medium Article above.
-     Add as the opening line: "Originally published on Medium at [URL]."
-     Publish 7 days after the Medium Article. -->
 
 ---
 

@@ -6,9 +6,8 @@ tool: OpenClaw
 status: placeholder
 author: TBD
 word-target: 1800-2500
-medium-article: primary
-linkedin-article: cross-post-7d
-linkedin-post: true
+publishes-first: medium
+cross-post: linkedin (7 days after)
 track-a-link: "../track-a-opinion/Article-2_The-Reference.md"
 test-bed: Obsidian vault (same vault, same queries across all setups)
 ---
@@ -157,23 +156,6 @@ test-bed: Obsidian vault (same vault, same queries across all setups)
 ---
 
 *Status: Placeholder. Replace this line when drafting begins.*
-
----
-
-## Medium Article
-
-<!-- PRIMARY PUBLISH — Track B publishes on Medium first.
-     The article body above is the draft for this.
-     When ready: submit to the series Medium Publication.
-     Add the published URL to frontmatter once live. -->
-
----
-
-## LinkedIn Article
-
-<!-- CROSS-POST — same content as the Medium Article above.
-     Add as the opening line: "Originally published on Medium at [URL]."
-     Publish 7 days after the Medium Article. -->
 
 ---
 
