@@ -23,14 +23,27 @@ transparency-note: Full NemoClaw stack (OpenShell sandboxing, audit trails) requ
 ## What NemoClaw Is
 
 <!-- NVIDIA's enterprise response to the OpenClaw security crisis.
-     What it adds over base OpenClaw. [cite each feature] -->
+     What it adds over base OpenClaw. [cite each feature]
+
+     NemoClaw is NVIDIA's enterprise fork of OpenClaw, adding four security and governance
+     features over the base tool: OpenShell kernel-level sandboxing, audit trails, Nemotron
+     models, and manifest-signed skills [cite each feature with NVIDIA docs]. These additions
+     exist to make OpenClaw deployable in regulated enterprise environments. One paragraph
+     covering all four — what each is, not just that it exists. -->
 
 ---
 
 ## Two Ways to Access It
 
 <!-- Path 1: Full NemoClaw stack (DGX hardware, NVIDIA AI Enterprise license)
-     Path 2: NVIDIA API catalog (Nemotron model quality, without the security stack) -->
+     Path 2: NVIDIA API catalog (Nemotron model quality, without the security stack)
+
+     Path 1 (DGX): full NemoClaw stack on DGX hardware with NVIDIA AI Enterprise licensing
+     — gets you the complete security stack. Requires hardware most organisations do not
+     have, and a licensing agreement to match. Path 2 (API catalog): Nemotron model quality
+     through a cloud API, no hardware required, but the security stack is unavailable. This
+     post follows Path 2 with documentation-based analysis of Path 1. Be explicit about
+     this split at the start and wherever it matters throughout. -->
 
 ---
 
@@ -38,9 +51,22 @@ transparency-note: Full NemoClaw stack (OpenShell sandboxing, audit trails) requ
 
 ### Prerequisites
 
+<!-- Document the API catalog setup: account creation requirements, API key provisioning,
+     any allowlisting or approval process encountered. Note the specific Nemotron model
+     and version used. These steps should be reproducible by any reader with an NVIDIA
+     developer account. -->
+
 ### Setup
 
+<!-- Actual API configuration steps: how queries are authenticated, what client library
+     or curl pattern was used, and any rate limits encountered during testing. Include
+     a minimal working example. -->
+
 ### The Same Test Queries via Nemotron
+
+<!-- Same three standard queries as Setup A, run via the Nemotron API. Record actual
+     results verbatim — the quality column in Article 5's comparison table depends on this
+     output. Note the latency for each query alongside the result. -->
 
 **Query 1:** [query text]
 **Result:** [actual output]
@@ -52,6 +78,11 @@ transparency-note: Full NemoClaw stack (OpenShell sandboxing, audit trails) requ
 **Result:** [actual output]
 
 ### Model Quality vs OpenClaw (Local) vs Claude API
+
+<!-- Fill the table with actual measured results. Use a consistent judgment rubric for
+     quality — factual accuracy, instruction-following, answer completeness. Do not use
+     vague adjectives like "better"; be specific about what Nemotron did differently on
+     which query. -->
 
 | | Nemotron (NVIDIA API) | Local model (OpenClaw) | Claude API |
 |---|---|---|---|
@@ -65,29 +96,57 @@ transparency-note: Full NemoClaw stack (OpenShell sandboxing, audit trails) requ
 
 <!-- Based on NVIDIA documentation. Clear that this was not tested live. -->
 
+<!-- Cover each of the four security features through NVIDIA documentation, with explicit
+     acknowledgment throughout that these were not tested live. For each feature, answer:
+     what problem it solves, how it works technically, and what it costs in hardware,
+     licensing, or operational complexity. Cite the specific NVIDIA docs for each claim. -->
+
 ### OpenShell Kernel-Level Sandboxing
+
+<!-- What it is, what it prevents, which NVIDIA doc describes it [cite]. -->
 
 ### Audit Trails
 
+<!-- What is logged, where logs go, what a compliance reviewer can extract from them. [cite] -->
+
 ### Manifest-Signed Skills
+
+<!-- What signing covers, what it does not cover, and why it matters for supply chain
+     integrity. [cite] -->
 
 ### DGX Hardware Requirement
 
 <!-- What DGX is. Why standard cloud GPU VMs do not qualify. [cite]
-     What NVIDIA AI Enterprise licensing covers. [cite] -->
+     What NVIDIA AI Enterprise licensing covers. [cite]
+
+     Explain what DGX-class hardware actually is and why commodity cloud GPU instances
+     do not qualify for the full NemoClaw stack. Name the NVIDIA AI Enterprise licensing
+     requirement [cite] and what it covers in practice. A reader considering this path
+     needs to know the entry cost before going further. -->
 
 ---
 
 ## The Lock-In Trade-Off
 
 <!-- NVIDIA owns the full stack. Security guaranteed by vendor control.
-     What that means for an organisation evaluating this. -->
+     What that means for an organisation evaluating this.
+
+     NVIDIA's security answer requires NVIDIA hardware, NVIDIA licensing, and NVIDIA
+     operational tooling throughout. One paragraph on what that means for an organisation
+     with a multi-year infrastructure plan — stated plainly, without softening. This feeds
+     directly into Article 4's central argument about vendor lock-in as a security
+     trade-off, not just a procurement inconvenience. -->
 
 ---
 
 ## Security Notes
 
-<!-- NemoClaw CVE status. [cite] -->
+<!-- NemoClaw CVE status. [cite]
+
+     NemoClaw CVE status as of the post date [cite]. Note whether the security additions
+     — sandboxing, audit trails, manifest-signed skills — change the vulnerability surface
+     area compared to base OpenClaw, or whether they add controls on top of the same
+     underlying attack surface. -->
 
 ---
 
