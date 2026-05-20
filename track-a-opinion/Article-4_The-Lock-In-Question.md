@@ -2,124 +2,116 @@
 title: "The Lock-In Question"
 series: "From Chatbot to Personal AI"
 track: A
-status: placeholder
+status: draft
 author: TBD
 word-target: 800-1000
 publishes-first: linkedin
 cross-post: medium (7 days after)
 track-b-link: "../track-b-receipts/Setup-F_NemoClaw.md"
-transparency-note: "Hands-on via NVIDIA API catalog only. DGX architecture covered via documentation."
+transparency-note: "Hands-on via NVIDIA API catalog only. DGX architecture covered via NVIDIA documentation."
 ---
 
 # The Lock-In Question
 
-*Hook: NVIDIA's enterprise response to the OpenClaw security crisis, and the trade-off it introduces.*
+*The enterprise version of the personal AI security problem has a vendor answer. That answer comes with a contract.*
 
 ---
 
 ## The Shadow AI Reality
 
-<!-- 22% of enterprises already running OpenClaw without IT approval. [cite]
-     CISO-relevant framing.
+Before NemoClaw existed, enterprises already had an OpenClaw problem.
 
-     The 22% statistic [cite] is the frame: enterprises are already running OpenClaw
-     without IT approval. Translate this into what a CISO actually faces — not a technology
-     choice that needs evaluating, but a governance failure already in progress. This sets
-     up why NemoClaw exists as an enterprise response rather than just an enterprise
-     product option. -->
+Estimates suggest roughly 22% of enterprises have employees running personal AI agents — OpenClaw and its variants — without IT approval [cite: source needed — verify before publish]. These are not rogue developers. They are product managers querying their project notes via WhatsApp, engineers running daily briefings from their work Obsidian vault, analysts connecting their personal research to an AI that is available at 11pm when the deadline is tomorrow morning.
+
+IT did not approve it. Security did not review it. The CISO found out when someone in the security team happened to notice the WebSocket traffic.
+
+This is the problem NemoClaw [cite: github.com/NVIDIA/NemoClaw] is designed to address. Not "how do we stop people from using personal AI at work" — that conversation is already over. But "how do we make it auditable, sandboxed, and compliant when it is already running."
 
 ---
 
 ## What NemoClaw Adds
 
-<!-- OpenShell kernel-level sandboxing, audit trails, Nemotron models,
-     manifest-signed skills. [cite each]
+Four additions over base OpenClaw, each addressing a specific gap:
 
-     Four specific additions over base OpenClaw: OpenShell kernel-level sandboxing, audit
-     trails, Nemotron models, and manifest-signed skills [cite each]. One sentence per
-     feature — not marketing language, but what each one actually changes about the security
-     or compliance posture of a deployment. A reader should finish this section knowing
-     exactly what they get that base OpenClaw does not provide. -->
+**OpenShell kernel-level sandboxing** confines what the agent's process can do at the OS level — syscall restrictions, directory access policies — enforced out-of-process, not by the agent itself. An agent that tries to read something it should not reaches a kernel boundary, not an application check it might be able to reason around [cite: NVIDIA NemoClaw docs].
+
+**Audit trails** log agent actions in a queryable format that a compliance reviewer can inspect [cite: NVIDIA NemoClaw docs]. This changes the conversation from "we cannot see what the agent did" to "here is the full action log."
+
+**Manifest-signed skills** mean a community-published skill that contains malicious code cannot be loaded. The signing authority is NVIDIA. Unsigned skills are blocked [cite: NVIDIA NemoClaw docs]. This addresses the supply chain risk that is present in base OpenClaw's skill ecosystem and absent here.
+
+**Nemotron model routing** gives access to NVIDIA's model family on-device, with a privacy router that keeps queries local when the model runs locally and routes to cloud models when the device cannot handle the inference load [cite: NVIDIA NemoClaw docs].
+
+Each of these is a real addition. None of them is free.
 
 ---
 
 ## The Hardware Reality
 
-<!-- DGX-only deployment. NVIDIA AI Enterprise licensing required. [cite]
-     What this means for most organisations.
+The full NemoClaw stack runs on DGX Spark, DGX Station, or RTX PRO workstations [cite: NVIDIA NemoClaw docs, build.nvidia.com/spark/nemoclaw]. Standard cloud GPU instances — an A100 on AWS, a V100 on GCP — do not qualify. NVIDIA AI Enterprise licensing is required [cite: NVIDIA docs]. DGX Spark starts at roughly $3,000 [cite: verify current pricing]; DGX Station is considerably more.
 
-     Full NemoClaw requires DGX hardware and NVIDIA AI Enterprise licensing [cite]. Most
-     organisations evaluating this cannot deploy the full stack today. State the barrier
-     plainly — cost, access, procurement lead time — then note the NVIDIA API catalog as
-     the accessible alternative covered in the next section. -->
+Most organisations evaluating this in 2026 cannot deploy the full stack today. The hardware is accessible to a specific slice of the enterprise market: companies with existing NVIDIA infrastructure, R&D labs, regulated industries with capital budgets for dedicated AI hardware.
+
+For everyone else, there is the API catalog path.
 
 ---
 
-## NVIDIA API as the Accessible Path
+## The API Catalog: What You Get and What You Give Up
 
-<!-- What you get (Nemotron model quality), what you give up
-     (the full security stack).
+The NVIDIA API catalog [cite: build.nvidia.com] provides access to Nemotron model quality without managing GPU hardware. Free credits are available to start. No DGX required.
 
-     What you get through the API catalog: Nemotron model quality without managing GPU
-     infrastructure. What you give up: the full security stack is unavailable — no
-     sandboxing, no audit trails, no manifest-signed skills. This is a meaningful trade-off,
-     not a temporary gap while DGX hardware becomes cheaper. One paragraph, stated plainly. -->
+What you get: Nemotron inference quality in a cloud API, accessible through the standard NemoClaw client.
+
+What you give up: the full security stack. OpenShell sandboxing, audit trails, and manifest-signed skills are not available through the API path. You get the model quality without the security controls.
+
+This is not a temporary gap while hardware becomes cheaper. The security controls require the OpenShell runtime, which requires the hardware. The API path is a different product. [FILL: note actual Nemotron response quality vs. the other providers tested in Setup-A — if Nemotron quality justifies the API path over free alternatives like Groq, say so. If it does not, say that too.]
 
 ---
 
 ## The Vendor Lock-In Question
 
-<!-- NVIDIA solves security by owning the full stack.
-     Is that the right trade?
+NVIDIA's security answer is coherent. Kernel-level sandboxing, audit trails, and signed skills form a defensible compliance posture for regulated industries.
 
-     NVIDIA's security answer requires NVIDIA hardware, NVIDIA licensing, and NVIDIA
-     operational tooling throughout the stack. One paragraph on what that means for an
-     organisation with a five-year infrastructure plan that might include hardware from
-     multiple vendors. Do not hedge — state the trade plainly and let the reader decide
-     whether it is the right one for their context. -->
+The price is that every element of the stack is NVIDIA. Hardware, runtime, model family, licensing, operational tooling. This is not incidental — it is structural. NVIDIA does not offer a path to run the NemoClaw security stack on non-NVIDIA hardware. The security guarantee and the infrastructure commitment are the same contract.
+
+For an organisation with an existing NVIDIA DGX estate, this is a logical extension of what they already have. For an organisation making a new infrastructure investment, the security question and the vendor question arrive together. Separating them is not possible on this stack.
+
+That trade-off is neither obviously right nor obviously wrong. It depends entirely on what hardware you already have and what compliance you actually need to satisfy.
 
 ---
 
 ## The Compliance Angle
 
-<!-- DPDP, GDPR, HIPAA. What changes when "shadow AI on a laptop"
-     becomes "regulated AI in a regulated industry."
+Shadow AI on a laptop is a policy problem. Shadow AI in a HIPAA-covered clinical workflow, or under DPDP data localisation requirements in India, or inside GDPR scope in the EU, is a legal problem with named consequences.
 
-     Shadow AI on a laptop is a policy problem. Shadow AI in a HIPAA-covered workflow or
-     under DPDP or GDPR is a legal problem. One paragraph on where NemoClaw's controls
-     actually satisfy regulatory requirements versus where they create an audit trail without
-     resolving the underlying compliance question. Name the specific regulations that change
-     the calculus most. -->
+NemoClaw's audit trails and sandboxing change what a compliance review can actually find. An agent with no audit trail is essentially undiscoverable in a post-incident investigation. An agent with NemoClaw's action logs is auditable in the same way an enterprise application is auditable.
+
+What NemoClaw does not solve: the data residency question. If the model call routes to a cloud endpoint — even through NVIDIA's privacy router — that query left the regulated environment. Organisations operating under strict data residency requirements (DPDP, certain HIPAA configurations, German BDSG) need to verify exactly where inference happens before treating NemoClaw as a compliance solution rather than a compliance improvement.
 
 ---
 
 ## Verdict
 
-<!-- Right answer for whom, wrong answer for whom.
-     Teaser to Article 5.
+NemoClaw is the right answer for organisations that already have NVIDIA infrastructure, are facing shadow AI they cannot stop, and need an audit trail before the next compliance review. The security layer is real and the controls are specific.
 
-     Right answer for: regulated industries with existing NVIDIA infrastructure, teams where
-     shadow AI is already running in production without IT knowledge, CISOs who need a
-     defensible vendor SLA. Wrong answer for: organisations that cannot access DGX hardware
-     or whose infrastructure is not NVIDIA-first. End with one sentence teasing Article 5 —
-     the synthesis article with the comparison table and the full security arc. -->
+It is the wrong answer for organisations without DGX hardware access, or for any team that values infrastructure flexibility. Once you commit to the NemoClaw security stack, you have also committed to NVIDIA hardware for the foreseeable future. That may be a fine commitment. It should be a deliberate one.
+
+Article 5 synthesizes all six tools and delivers the comparison table. The NemoClaw lock-in question becomes the sharpest trade-off in that table.
 
 ---
 
-**Enterprise reframe:** We have evaluated enterprise trade-offs like this one. Here is what NVIDIA gets right and where the lock-in becomes the cost.
+## Enterprise Reframe
+
+We have made infrastructure commitment decisions like this one for clients. The pattern is consistent: the vendor that solves your security problem by owning your whole stack is solving the problem correctly but creating a different one. The security review gets easier. The vendor negotiation gets harder. The exit strategy disappears.
+
+For regulated industries, that is sometimes the right trade. For everyone else, the question to ask first is not "does NemoClaw solve our security problem" but "what does it cost us in five years if NVIDIA changes the licensing model." The answer to that question should be part of the evaluation, not a footnote.
 
 ---
 
-*Status: Placeholder. Replace this line when drafting begins.*
+*Status: Draft. Fill the API quality comparison [FILL] after running Setup-F. Verify the 22% shadow AI statistic — do not publish without a source. Verify current DGX hardware pricing.*
 
 ---
 
 ## Three Takes
-
-<!-- 2–3 sentences per co-author in their own voice.
-     Anchor question: "What I kept thinking about after writing this."
-     First-person is fine here. Voice rules still apply: no em dashes,
-     no rhetorical questions, specific over generic. -->
 
 **[Author A]:**
 
@@ -131,11 +123,10 @@ transparency-note: "Hands-on via NVIDIA API catalog only. DGX architecture cover
 
 ## LinkedIn Post
 
-<!-- Short feed post promoting the LinkedIn Article. Target ~200 words.
-     Publish same day as the LinkedIn Article.
-     Main author publishes and tags the other two co-authors.
-     Co-authors each repost with 3–4 bullets of their own take.
+22% of enterprises are running personal AI agents without IT approval. That number is probably conservative.
 
-     WRITE: Open with the single strongest insight from the article (1–2 sentences).
-     One or two supporting lines. End with "Full article linked." No summary,
-     no "I just published" opener. Get to the substance on line one. -->
+NVIDIA's answer to this is NemoClaw: a secure wrapper for OpenClaw that adds kernel-level sandboxing, audit trails, and manifest-signed skills. It is a real security improvement. It also requires DGX hardware, NVIDIA AI Enterprise licensing, and a commitment to NVIDIA's full stack.
+
+The security guarantee and the vendor lock-in are the same contract. For some organisations that is the right trade. The article explains how to tell which one you are.
+
+Full article linked.

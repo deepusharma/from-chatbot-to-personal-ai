@@ -6,12 +6,28 @@ Voice and style rules for all three co-authors. Every piece — Track A and Trac
 
 ## The Non-Negotiables
 
-- **No em dashes.** Use a short sentence instead.
+- **No em dashes.** Use a short sentence instead. This is the single fastest way to flag AI-written content. Treat it as a hard stop.
 - **No rhetorical questions.** They are an AI writing habit and rarely land well.
 - **Never open an article or LinkedIn post with "I."** Find a different entry point.
 - **Never open with a compliment or scene-setter.** Get to the substance in the first sentence.
 - **Specific over generic.** Every claim tied to a real data point or real observation. If you cannot point to a source, do not write the claim.
 - **No filler superlatives.** "Robust", "powerful", "seamless", "elegant" — cut them.
+- **Don't stack short sentences as a rhythm.** Short sentences are fine as punchlines. Not as the beat throughout. That pattern reads like marketing copy.
+- **Validate before claiming.** Technical claims and attributed quotes must be verified before the draft. If you cannot confirm exact wording, paraphrase or remove. One wrong number kills credibility with this audience.
+
+---
+
+## Humor and Tone
+
+The voice is warm and a little wry. Not corporate.
+
+**Dry, self-deprecating, or sarcastic humor is welcome** at genuine punchline moments. One quip per article is enough. Examples of the register: "So I did what any reasonable person would do." / "Must have been nice." / A parenthetical aside that undercuts the previous sentence.
+
+**Emojis** are allowed, sparingly, only where the humor or emphasis actually lands. Not for decoration. One or two per article at most. 😅 at the punchline of an absurd escalation. Not a clapping-hands emoji at the end of every bullet point.
+
+**Hold the tension.** Two conflicting truths can sit together without a clean resolution. If something is both impressive and concerning, say so. Don't pick a side just to give the reader a tidy takeaway.
+
+**Personal over preachy.** "What I found" beats "what you should do." Share the observation; let the reader draw the conclusion.
 
 ---
 

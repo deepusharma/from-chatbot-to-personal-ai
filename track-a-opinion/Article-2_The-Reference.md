@@ -2,7 +2,7 @@
 title: "The Reference"
 series: "From Chatbot to Personal AI"
 track: A
-status: placeholder
+status: draft
 author: TBD
 word-target: 700-1000
 publishes-first: linkedin
@@ -12,94 +12,69 @@ track-b-link: "../track-b-receipts/Setup-A_OpenClaw.md"
 
 # The Reference
 
-*Hook: Connecting an Obsidian vault to WhatsApp in 20 minutes. Zero cloud. Here is what happened.*
+*[Full setup notes: Setup-A_OpenClaw.md]*
 
 ---
 
 ## Setup: Three Observations
 
-<!-- Not step-by-step. What surprised, what did not.
-     Full setup notes linked to Track B Setup A.
+The step-by-step is in the Track B post. Three things worth naming here that the docs do not prepare you for.
 
-     Not a tutorial — the step-by-step is in Track B Setup A, linked below. Pick three
-     observations from the actual setup that a technical reader would find interesting: what
-     was easier than expected, what required a workaround, and what the architecture reveals
-     about how OpenClaw is designed. Keep it to one short paragraph per observation. -->
+**Observation 1:** [FILL: one paragraph — what was easier than expected, what that reveals about how OpenClaw is designed. Specific and architectural, not a general impression. Example register: "The installer handles Node version conflicts automatically, which tells you something about how often that comes up."]
 
-[Full setup notes: Setup-A_OpenClaw.md]
+**Observation 2:** [FILL: one paragraph — what required a workaround and what the workaround reveals. The WhatsApp QR code stability, the Gatekeeper block, or whatever actually caused friction. One specific thing that did not match the docs.]
+
+**Observation 3:** [FILL: one paragraph — what the architecture reveals that surface-level usage would not show. Something a practitioner who reads code would notice. This is the observation that feeds the enterprise reframe below.]
 
 ---
 
 ## The Demo: On-Demand Vault Query
 
-<!-- One concrete example. Real query, real result.
+[FILL: pick one of the three test queries and paste the actual output verbatim or near-verbatim. Set it up in one sentence — what you asked and why that query tests something real. Then show the output. Do not summarize it. The specificity is the point.]
 
-     Pick one real query from the test set and show the actual result verbatim or
-     near-verbatim. Specificity is the point — a reader should finish this section knowing
-     exactly what querying a personal vault via WhatsApp looks like in practice, not just
-     in concept. One honest query shown in full lands better than a summary of three. -->
+One thing to note about the output: [FILL: one honest observation — where it was better than expected, where it was wrong or incomplete, or what the response reveals about how OpenClaw retrieves from the vault.]
 
 ---
 
 ## The Demo: Daily Briefing
 
-<!-- What it pulls from the vault, how it reads, whether it is
-     actually useful.
-
-     Describe the daily briefing specifically: what it pulls from the vault (calendar,
-     inbox, recent notes, or whatever the config draws on), how the output reads, and
-     whether a practitioner would actually use it every day or demo it once and turn it
-     off. Be direct about the answer — if it is more impressive than useful, say so. -->
+[FILL: describe the daily briefing specifically. What it pulled from the vault, how the output read, whether you would actually use it every day. If the answer is "impressive the first time, off after a week," say that. The Track B post has the config details; this section is the honest user experience.]
 
 ---
 
 ## Local Model vs Claude API
 
-<!-- Quality, speed, privacy trade-off. One paragraph.
-
-     One paragraph comparing the two paths: local model (Ollama/Llama — no cloud, slower,
-     answer quality drops on complex queries) vs Claude API (faster, sharper answers, but
-     queries leave your hardware). Name the actual models used in the test and note any
-     quality or speed differences that showed up on the standard vault queries. -->
+[FILL: one paragraph comparing the two paths on the three test queries. Name the actual Ollama model used. Note which query type showed the biggest quality difference — synthesis queries (blockers, decisions) tend to separate small local models from large cloud ones faster than summarization queries. Name the trade-off plainly: local is private and free, the gap on complex queries is real.]
 
 ---
 
 ## Security Caveat
 
-<!-- Current CVE status for OpenClaw. [cite]
+OpenClaw has 138 disclosed CVEs across its first five months [cite: jgamblin/OpenClawCVEs]. The one most relevant to this exact setup is CVE-2026-25253: a cross-site WebSocket hijacking vulnerability in the local WebSocket server that the ObsidianClaw plugin connects through [cite: oasis.security]. [FILL: note the patch status of CVE-2026-25253 in the version installed. Two sentences maximum.]
 
-     State the current CVE status for OpenClaw as of the date this was written, with the
-     specific advisory cited [cite]. Two sentences maximum — this is a factual note, not a
-     full analysis. The complete security arc runs through Article 5. -->
+The full security arc runs through Article 5. For this setup: verify the version you install has patches for the WebSocket advisory before running it with a browser open.
 
 ---
 
 ## Verdict
 
-<!-- Honest verdict. What works, what does not, what would be changed.
-     Teaser to Article 3.
+[FILL: two honest sentences. What OpenClaw delivers and where it falls short. What you would change about the setup if doing it again. Do not hedge — land on a position.]
 
-     Two honest sentences: what OpenClaw delivers and where it falls short. What would you
-     change about the setup if doing it again? End with one teaser sentence pulling toward
-     Article 3 — specifically that memU bets forgetting between sessions is the wrong
-     design, and that Article 3 tests whether that bet pays off. -->
+The next article tests whether the thing OpenClaw most conspicuously lacks — memory between sessions — is actually a problem worth solving, or whether the solution creates problems of its own.
 
 ---
 
-**Enterprise reframe:** What enterprise architects notice about OpenClaw's architecture that a hobbyist reviewer would miss.
+## Enterprise Reframe
+
+[FILL: one specific observation a hobbyist reviewer would not make. Candidates from the setup: how OpenClaw's skill architecture maps onto enterprise plugin governance, what the WebSocket design reveals about the security model's original assumptions, or how the local-vs-cloud model choice maps onto data residency decisions enterprise teams make at scale. Be specific — name the architectural observation, then the enterprise implication.]
 
 ---
 
-*Status: Placeholder. Replace this line when drafting begins.*
+*Status: Draft. Most sections require real setup data. Fill during and after the Setup-A session. The enterprise reframe should come from a genuine observation during setup, not be reverse-engineered from what sounds smart.*
 
 ---
 
 ## Three Takes
-
-<!-- 2–3 sentences per co-author in their own voice.
-     Anchor question: "What I kept thinking about after writing this."
-     First-person is fine here. Voice rules still apply: no em dashes,
-     no rhetorical questions, specific over generic. -->
 
 **[Author A]:**
 
@@ -111,11 +86,4 @@ track-b-link: "../track-b-receipts/Setup-A_OpenClaw.md"
 
 ## LinkedIn Post
 
-<!-- Short feed post promoting the LinkedIn Article. Target ~200 words.
-     Publish same day as the LinkedIn Article.
-     Main author publishes and tags the other two co-authors.
-     Co-authors each repost with 3–4 bullets of their own take.
-
-     WRITE: Open with the single strongest insight from the article (1–2 sentences).
-     One or two supporting lines. End with "Full article linked." No summary,
-     no "I just published" opener. Get to the substance on line one. -->
+[FILL: open with the single strongest observation from the setup — not "I connected my vault to WhatsApp" but the specific surprising or non-obvious thing that happened. One or two supporting lines. End with "Full article linked." No scene-setter, no "I just published." Get to the substance on line one.]

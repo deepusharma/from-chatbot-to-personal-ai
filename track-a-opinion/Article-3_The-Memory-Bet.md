@@ -2,7 +2,7 @@
 title: "The Memory Bet"
 series: "From Chatbot to Personal AI"
 track: A
-status: placeholder
+status: draft
 author: TBD
 word-target: 700-1000
 publishes-first: linkedin
@@ -12,102 +12,89 @@ track-b-link: "../track-b-receipts/Setup-D_memU.md"
 
 # The Memory Bet
 
-*Hook: Most AI assistants forget everything between sessions. memU bets that is the wrong design.*
+*Most personal AI assistants forget everything between sessions. memU bets that is the wrong design. After running the same queries with and without accumulated memory, here is what we found.*
 
 ---
 
 ## The Memory-First Philosophy
 
-<!-- Why most AI assistants forget and why memU bets that is the
-     wrong design. Stateless chat vs persistent memory as competing
-     visions of "personal."
+Every other tool in this series starts each session from scratch. You ask a question; the agent answers it using whatever context you provide right now. Tomorrow it has no idea you asked.
 
-     Lay out both sides in one paragraph: stateless (simpler, no data accumulation risk,
-     no single point of failure) vs persistent memory (the assistant actually learns your
-     working context over time and stops asking questions you have already answered). The
-     hook states memU's bet; this section explains what the bet is against. Do not resolve
-     the argument here — that is what the rest of the article does. -->
+memU's argument is that this is a design failure, not a design choice. Stateless agents cannot learn your working patterns. They cannot improve on a question you have already answered three times. They cannot synthesize across conversations that happened weeks apart. What they lose between sessions is not just context — it is the compound interest of working together over time.
+
+The counterargument is real: simpler, no data accumulation risk, no single point of failure for your personal knowledge graph. A stateless agent that answers well is better than a persistent one that remembers incorrectly. Both positions are defensible. The experiment is what settles it.
+
+One thing memU is not: an agent. It is a memory layer that wraps agents like OpenClaw. The agent you talk to is memUBot [cite: github.com/NevaMind-AI/memUBot]. memU [cite: github.com/NevaMind-AI/memU] is the PostgreSQL-backed knowledge graph underneath it. This distinction matters when you are evaluating what the setup actually requires — and the setup requires more than dropping a binary.
+
+*[Full setup notes: Setup-D_memU.md]*
 
 ---
 
 ## What Teaching memU About Yourself Actually Looks Like
 
-<!-- Setup and configuration experience.
-     Full notes linked to Track B Setup D.
-
-     Describe the onboarding concretely: what information you provided, in what format,
-     and how long before the memory felt meaningful in actual responses. This is not a
-     config guide (that is in Track B Setup D, linked below) — it is the user experience
-     of the setup, written for someone deciding whether to bother. One or two paragraphs. -->
-
-[Full setup notes: Setup-D_memU.md]
+[FILL: one to two paragraphs. What information you provided in the onboarding session, in what format, and how long before the responses felt different. Include one concrete example — something you told memU in session one that it correctly used in session two or three. If it took longer than one session to feel meaningful, say how long. If it never felt meaningfully different, say that too. This section is the case for whether the onboarding investment is worth it.]
 
 ---
 
 ## Same Queries, Different Context
 
-<!-- Same vault queries as Article 2, but with accumulated memory.
-     How does persistent context change the answers?
+The three standard test queries ran twice: once in the first session before meaningful memory accumulated, and again after [FILL: N] sessions.
 
-     Run the same three test queries after memory has accumulated across multiple sessions.
-     Document the actual delta: which query changed most and how. Avoid the phrase "more
-     personalized" — show the difference in the output text, not a summary of it. The
-     before-and-after specifics are what make this section credible to a skeptical reader. -->
+**What changed on Query 1** (open blockers across projects): [FILL: specific delta. Did memU surface something the vault alone could not have? Or did it return essentially the same answer? Show the difference in actual output, not a description of it.]
+
+**What changed on Query 2** (decisions and action items from this week's meetings): [FILL: same format.]
+
+**What changed on Query 3** (AI tooling research summary): [FILL: same format. This query is the hardest test for memory — the vault already has the research notes, so the question is whether accumulated session context adds anything on top of what the vault contains.]
+
+The honest summary: [FILL: one sentence stating which query type benefited most from memory and which did not.]
 
 ---
 
 ## The Privacy Question
 
-<!-- A model of you is valuable and vulnerable.
-     What memU does about it.
+A persistent model of you is more valuable to you and more dangerous in a breach. memU stores its knowledge graph in a local PostgreSQL database [cite: github.com/NevaMind-AI/memU] — not in cloud sync, not in the tool provider's servers, on your machine. The data is there until you explicitly delete it, and there is no natural expiry.
 
-     A persistent model of you is more valuable to you and more attractive to an attacker
-     or data breach. Cover what memU actually does with stored data: where it lives, whether
-     it is encrypted at rest, what controls exist for deletion. One factual paragraph —
-     no vague reassurances about how privacy matters to the project. -->
+[FILL: note what controls exist for selective deletion — can you remove a specific memory item without wiping the whole store? Document this from the actual setup. No vague reassurances — name what works and what does not.]
+
+One CVE to check before running: CVE-2026-25253, which allows extraction of user authentication tokens [cite: NVD]. Patched in version 2026.1.29 [cite: github.com/NevaMind-AI/memU releases]. Verify your installed version.
 
 ---
 
 ## Useful or Just Familiar?
 
-<!-- Does persistent memory make the assistant genuinely more useful,
-     or just more familiar? The honest answer.
+[FILL: the key editorial judgment of the article. Did accumulated memory make the agent genuinely more capable on real tasks — synthesizing across sessions, recalling specific context correctly, improving on recurring queries? Or did it mostly feel more comfortable because it knew your name and preferences?
 
-     This is the key editorial judgment of the article. Did persistent memory make the
-     assistant genuinely more capable on real tasks, or did it just feel more comfortable
-     because it knew your name and working preferences? If the answer is "it depends on
-     the query type," specify which types benefited and which did not — that specificity
-     is the value, not the hedge. -->
+If the answer is "it depends," be specific: which query types improved and which did not. The synthesis queries (blockers, decisions) are the most interesting test — do they get better when the agent has weeks of context, or is the vault alone sufficient?
+
+Hold the tension if the evidence is mixed. "It worked on X and not on Y" is a more useful verdict than picking a side.]
 
 ---
 
 ## Verdict
 
-<!-- The right choice when memory matters, the wrong choice when it
-     does not. Teaser to Article 4.
+[FILL: right choice when: the use case involves accumulated personal context — recurring projects, evolving priorities, questions you ask repeatedly. Wrong choice when: the use case is discrete one-off queries where session context is enough and the infrastructure overhead is not justified.
 
-     Right choice when: the use case involves accumulated personal context — work patterns,
-     project knowledge, recurring preferences. Wrong choice when: the use case is discrete,
-     one-off queries where session context is sufficient. End with one teaser sentence to
-     Article 4: NVIDIA's enterprise response to the shadow AI problem, and the trade-off
-     it introduces. -->
+Note the infrastructure reality plainly: memU requires PostgreSQL with pgvector. This is not a binary you drop in a folder. That cost is either acceptable or it is not, depending on what you need from the memory layer.]
+
+The next article examines what happens when the enterprise version of this security question gets a vendor answer — and what that answer costs.
 
 ---
 
-**Enterprise reframe:** Persistent memory in personal AI maps directly onto a hard problem in enterprise AI governance. Here is what the personal version teaches about the enterprise version.
+## Enterprise Reframe
+
+Persistent memory in personal AI is a direct analogue of a problem enterprise AI teams deal with constantly: how do you give an AI system enough context about your organization to be useful, without creating a data asset that is hard to audit, harder to delete, and attractive to attackers?
+
+The personal version makes the problem small enough to hold in your hands. The memory store is one Postgres database on one laptop. The retention question is yours to answer. The deletion path is a `pg_dump` and a `DROP DATABASE`. At enterprise scale, with shared memory across teams, with compliance requirements around what gets stored and for how long, the same question becomes a multi-quarter governance project.
+
+What the personal version teaches: the hard part is not the memory architecture. It is the policy layer on top of it. memU has the architecture. The policy layer is left to the user — which is appropriate for personal software and completely inappropriate for regulated enterprise deployment.
 
 ---
 
-*Status: Placeholder. Replace this line when drafting begins.*
+*Status: Draft. The query comparison sections and the verdict are the core of the article and require real data. Do not fill them from imagination — the before/after delta is the only thing that makes this article credible to a skeptical reader.*
 
 ---
 
 ## Three Takes
-
-<!-- 2–3 sentences per co-author in their own voice.
-     Anchor question: "What I kept thinking about after writing this."
-     First-person is fine here. Voice rules still apply: no em dashes,
-     no rhetorical questions, specific over generic. -->
 
 **[Author A]:**
 
@@ -119,11 +106,4 @@ track-b-link: "../track-b-receipts/Setup-D_memU.md"
 
 ## LinkedIn Post
 
-<!-- Short feed post promoting the LinkedIn Article. Target ~200 words.
-     Publish same day as the LinkedIn Article.
-     Main author publishes and tags the other two co-authors.
-     Co-authors each repost with 3–4 bullets of their own take.
-
-     WRITE: Open with the single strongest insight from the article (1–2 sentences).
-     One or two supporting lines. End with "Full article linked." No summary,
-     no "I just published" opener. Get to the substance on line one. -->
+[FILL: open with the specific finding from the before/after query comparison — not "persistent memory improves responses" but the one query where it made a measurable difference, or the one where it surprisingly did not. One or two supporting lines. End with "Full article linked."]
