@@ -11,7 +11,7 @@ cross-post: linkedin (7 days after)
 track-a-link: "../track-a-opinion/Article-2_The-Reference.md"
 test-bed: ~/Documents/experiments/from-chatbot-to-personal-ai/vault
 tested-on: macOS 26.4.1 Apple Silicon
-openclaw-version: [FILL: openclaw --version output]
+openclaw-version: OpenClaw 2026.5.19 (a185ca2)
 node-version: v22.22.3
 test-date: 2026-05-19
 ---
@@ -47,27 +47,15 @@ Hardware: OpenClaw is a Node.js process. At idle it sits around 400MB RAM [cite:
 
 ## Installation
 
-Two methods. The CLI installer is faster. Source is there if you want to see what you are actually running, which given the CVE history is not an unreasonable thing to want.
+Two methods. npm is faster and installs a pre-built package. Source is there if you want to audit what you are running, which given the CVE history is not an unreasonable thing to want.
 
-**Method 1: CLI installer**
+**Method 1: npm global install (tested, recommended)**
 
-```bash
-npx openclaw-easy@latest
-```
-
-[VERIFY: this is the correct install command. Check docs.openclaw.ai/install for the current CLI command.]
-
-The installer auto-detects your OS and Node version, downloads the current release, and runs a post-install configuration step. [FILL: document exactly what the installer outputs and asks. Note any steps that diverge from what the docs describe — those are the steps readers will need.]
-
-**Method 2: From source**
+Make sure Node v22.19.0 or later is active before running this. The package will install but fail to run on older versions.
 
 ```bash
-git clone https://github.com/openclaw/openclaw.git
-cd openclaw
-pnpm install
+npm install -g openclaw@latest
 ```
-
-[FILL: note actual output, any warnings, whether pnpm install threw errors. Record the exact openclaw version installed.]
 
 **Verify the install:**
 
@@ -75,11 +63,22 @@ pnpm install
 openclaw --version
 ```
 
-Expected output: `openclaw [FILL: version string]`
+Expected output: `OpenClaw 2026.5.19 (a185ca2)` (version string will differ on later releases)
 
-[FILL: note if any errors appeared here, and what fixed them. Common macOS issues include Gatekeeper blocks and missing native dependencies.]
+**Method 2: From source**
 
-**Note on the hosted installer:** OpenClaw also offers a hosted installer at openclaw.ai [VERIFY: URL]. This was not used here. The docs are vague about whether it installs a cloud sync component alongside the local agent. For a setup claiming "zero cloud," that is not a great look. CLI or source install is the verifiable path.
+Use this if you want to read the code before running it. Requires pnpm and a build step that takes about 90 seconds.
+
+```bash
+git clone https://github.com/openclaw/openclaw.git ~/Documents/experiments/from-chatbot-to-personal-ai/tools/openclaw
+cd ~/Documents/experiments/from-chatbot-to-personal-ai/tools/openclaw
+pnpm install
+pnpm build
+```
+
+The build step compiles TypeScript across 128 workspace projects. Expect ~90 seconds on Apple Silicon. Running `pnpm start` before the build completes produces an error asking you to build first — that is expected.
+
+Running from source does not install a global `openclaw` binary. Use `node openclaw.mjs` from inside the cloned folder instead.
 
 ---
 
@@ -167,106 +166,66 @@ OpenClaw will display a QR code in the terminal. Open WhatsApp on your phone →
 
 ---
 
-## Local Model vs API Setup
+## Model Setup
 
-Five options tested, ranging from fully local (nothing leaves your machine) to free cloud APIs. Pick based on your privacy requirements and tolerance for sign-up flows.
+All model configuration goes through the interactive wizard — the `openclaw config set` commands do not work. Use:
+
+```bash
+openclaw configure --section model
+```
+
+The wizard walks through: gateway location → provider selection → API key → model picker. Steps below cover the tested path (OpenRouter) and the untested alternatives.
 
 ---
 
-**Option 1: Ollama (local, free, private)**
+**Tested: OpenRouter (free models, aggregator)**
 
-No API key. No data leaves your machine. The tradeoff is model quality at smaller sizes.
+OpenRouter aggregates dozens of providers. Free models are available with no credit card. Get a key at [openrouter.ai](https://openrouter.ai).
+
+Run the configure wizard:
+
+```bash
+openclaw configure --section model
+```
+
+When prompted for provider: select **More…** → **OpenRouter** → paste your API key.
+
+In the model picker, type `:free` to filter to free models (19 available at time of testing). Select `openrouter/meta-llama/llama-3.3-70b-instruct:free` — it is the largest and most capable free option in the list.
+
+**Important:** the wizard sets `openrouter/auto` as primary and your chosen model as fallback only. Fix this after the wizard exits:
+
+```bash
+echo '{"agents":{"defaults":{"model":{"primary":"openrouter/meta-llama/llama-3.3-70b-instruct:free","fallbacks":[]}}}}' | openclaw config patch --stdin
+```
+
+Verify:
+
+```bash
+cat ~/.openclaw/openclaw.json | grep primary
+```
+
+Expected: `"primary": "openrouter/meta-llama/llama-3.3-70b-instruct:free"`
+
+Free models available at time of testing: `llama-3.3-70b-instruct:free`, `deepseek-v4-flash:free`, `gemma-4-31b-it:free`, and 16 others. Check [openrouter.ai/models?filter=free](https://openrouter.ai/models?filter=free) for the current list — it changes.
+
+---
+
+**Not tested: Ollama (local, free, private)**
+
+No API key. Nothing leaves your machine. Run the configure wizard and select Ollama. Start Ollama before configuring:
 
 ```bash
 ollama serve
 ollama pull llama3.2
 ```
 
-[FILL: exact model used. Note pull size. Note whether openclaw auto-detected Ollama or required manual config.]
-
-OpenClaw Easy auto-discovers installed Ollama models [VERIFY: source]. If auto-discovery did not work:
-
-```bash
-openclaw config set ai-provider ollama
-openclaw config set ollama-model llama3.2
-```
-
-[FILL: verify correct config commands.]
+Then: `openclaw configure --section model` → select Ollama. [VERIFY: Ollama appears in the provider list — not confirmed in this session.]
 
 ---
 
-**Option 2: Groq (free, fast, cloud)**
+**Not tested: Groq, Google Gemini, NVIDIA NIM, Anthropic**
 
-Groq's free tier gives you access to Llama 3.3 70B and Gemma 2 9B with genuinely fast inference. Get a key at [console.groq.com](https://console.groq.com). No credit card required.
-
-```bash
-openclaw config set ai-provider groq
-openclaw config set groq-api-key YOUR_KEY
-openclaw config set groq-model llama-3.3-70b-versatile
-```
-
-[VERIFY: openclaw supports groq as a named provider. If not, check whether it falls under a generic OpenAI-compatible endpoint config.]
-
-Available free models at time of writing: `llama-3.3-70b-versatile`, `llama-3.1-8b-instant`, `gemma2-9b-it`. Rate limits apply but are generous for personal use.
-
----
-
-**Option 3: Google Gemini (free tier, cloud)**
-
-Google AI Studio gives free access to Gemini Flash. Get a key at [aistudio.google.com](https://aistudio.google.com). Again, no credit card.
-
-```bash
-openclaw config set ai-provider google
-openclaw config set google-api-key YOUR_KEY
-openclaw config set google-model gemini-2.0-flash
-```
-
-[VERIFY: openclaw's provider name for Gemini. May be `google`, `gemini`, or configured via OpenAI-compatible endpoint.]
-
-Gemini Flash has a generous free quota. Gemini Pro has higher limits with billing enabled.
-
----
-
-**Option 4: OpenRouter (free models, aggregator)**
-
-OpenRouter aggregates dozens of providers and offers some models on a free tier. One key, many models. Get one at [openrouter.ai](https://openrouter.ai).
-
-```bash
-openclaw config set ai-provider openrouter
-openclaw config set openrouter-api-key YOUR_KEY
-openclaw config set openrouter-model google/gemma-3-27b-it:free
-```
-
-[VERIFY: openclaw's provider name for OpenRouter.]
-
-Free models rotate. Check [openrouter.ai/models?filter=free](https://openrouter.ai/models?filter=free) for what is currently available at zero cost.
-
----
-
-**Option 5: NVIDIA NIM (free credits, cloud)**
-
-NVIDIA's inference platform includes free credits for hosted models including Llama 3.1 405B and DeepSeek. Get started at [build.nvidia.com](https://build.nvidia.com).
-
-```bash
-openclaw config set ai-provider nvidia
-openclaw config set nvidia-api-key YOUR_KEY
-openclaw config set nvidia-model meta/llama-3.1-405b-instruct
-```
-
-[VERIFY: openclaw's provider name for NVIDIA NIM. May require an OpenAI-compatible base URL: `https://integrate.api.nvidia.com/v1`.]
-
----
-
-**Option 6: Anthropic Claude API (paid, highest quality)**
-
-```bash
-openclaw config set ai-provider anthropic
-openclaw config set anthropic-api-key YOUR_KEY
-```
-
-[FILL: verify correct config commands. Note whether the API key is stored in plaintext in the config file. If yes, note the path and permissions.]
-
-Not free, but noticeably better on complex multi-note synthesis queries.
+All use the same `openclaw configure --section model` flow. Select your provider, enter your API key, pick a model. The `:free` filter in the model picker works across all cloud providers that offer free tiers. [VERIFY: each provider needs to be tested separately to confirm it appears in the wizard's provider list.]
 
 ---
 

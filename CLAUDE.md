@@ -104,6 +104,19 @@ Session naming convention for this project: `FromChatbotToPersonalAI - NN` where
 
 ---
 
+## Guided Setup Rule
+
+When guiding Deepak through a setup session, always describe what each command does in one sentence before presenting the code block. Example:
+
+> This checks which start scripts are available in the package:
+> ```bash
+> grep -E '"start"' package.json
+> ```
+
+Never give a bare command without context. Deepak runs all commands himself.
+
+---
+
 ## Response Timestamp
 
 Append a timestamp to the end of every response, no exceptions. Format:
