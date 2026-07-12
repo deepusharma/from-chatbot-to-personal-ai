@@ -1,4 +1,4 @@
-# Next Session Starter
+# Session State
 
 **Project:** From Chatbot to Personal AI
 **Last session:** 2026-05-22 — FromChatbotToPersonalAI - 02
@@ -62,6 +62,5 @@ nvm use 22 && openclaw agent --agent main --message "What are the open blockers 
 
 ## Pending Decisions (Carried Forward)
 
-- Co-author work split: who leads which articles, who is the voice editor
 - "22% shadow AI" stat: needs citation before Article 4 can publish
 - memU: defer until after other 5 setups
