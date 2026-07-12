@@ -4,7 +4,7 @@ This file is the canonical instruction file for this project, read completely at
 
 ---
 
-## What This Project Is
+## Project Overview
 
 A two-track LinkedIn/Medium article series testing six open-source personal AI tools against the same Obsidian vault with the same three queries. Author: Deepak Sharma. Honest verdicts.
 
@@ -17,9 +17,13 @@ A two-track LinkedIn/Medium article series testing six open-source personal AI t
 
 **Open question (as of 2026-07-12):** Is this six-tool list still current, and does the series concept itself still fit, after ~2 months idle? Not yet decided — revisit before resuming Track B.
 
+*(No Tech Stack / Coding Standards / Git Workflow / Testing Rules sections — this is a writing project, not a code project. Everything specific to it is below.)*
+
 ---
 
-## The Six Tools
+## Project-Specific
+
+### The Six Tools
 
 | Tool | What it is | Key dependency | Critical CVE |
 |---|---|---|---|
@@ -30,9 +34,7 @@ A two-track LinkedIn/Medium article series testing six open-source personal AI t
 | Hermes | Self-improving agent from Nous Research. Builds a skill library after 20-30 tasks. Anthropic subscriptions BLOCKED — needs API key from console.anthropic.com. | None | CVE-2026-7396 (path traversal in WeChat Work adapter only) |
 | NemoClaw | NVIDIA wrapper FOR OpenClaw. NOT standalone — requires OpenClaw running underneath. Full stack needs DGX hardware + NVIDIA AI Enterprise license. API catalog path works without DGX but skips security controls. | OpenClaw | CVE-2026-24222 (CVSS 8.6, sandbox escape via prompt injection, fixed in v0.0.18) |
 
----
-
-## The Three Test Queries
+### The Three Test Queries
 
 These are locked. Every tool runs against exactly these three, against `~/Documents/experiments/from-chatbot-to-personal-ai/vault/`.
 
@@ -40,9 +42,7 @@ These are locked. Every tool runs against exactly these three, against `~/Docume
 2. What decisions and action items came out of my meetings this week?
 3. Summarize what I know about AI tooling and what I still need to research.
 
----
-
-## Article Status
+### Article Status
 
 All 11 articles drafted. All contain `[FILL]` markers that require real setup data.
 
@@ -64,9 +64,7 @@ All 11 articles drafted. All contain `[FILL]` markers that require real setup da
 
 **Three Takes section in each article:** format needs a look before publish — one voice per article now, not necessarily three. Not yet decided; part of the broader series re-evaluation above.
 
----
-
-## Voice Rules (Non-Negotiables)
+### Voice Rules (Non-Negotiables)
 
 Full rules in `Writing-Guidelines.md`. Kept in sync with the vault's `06-AI-Instructions/Voice-Writing.md` — check there if this ever looks stale. The hard stops:
 
@@ -80,35 +78,21 @@ Full rules in `Writing-Guidelines.md`. Kept in sync with the vault's `06-AI-Inst
 - Validate before claiming. Every specific number needs a source.
 - "Personal over preachy." Share the observation; let the reader draw the conclusion.
 
----
-
-## [FILL] Protocol
+### [FILL] Protocol
 
 `[FILL]` markers require real data from the actual setup sessions. Do not substitute plausible-sounding content. The credibility of this series rests on the comparison table being real. If a section cannot be filled without running the setup, leave it marked `[FILL]` and note what data is needed.
 
----
-
-## Citation Discipline
+### Citation Discipline
 
 Every specific number (star counts, CVE counts, benchmark figures, the "22% enterprises" claim) needs a sourced URL and an as-of date. Status tracked in `Citation-Tables.md`. Accuracy and relevance matter more than precision on fast-moving figures like star counts — don't get hung up on exact-to-the-day numbers, but don't state anything unsourced either. The "22% shadow AI" stat in Article 4 is unverified — that article cannot publish without a source.
 
----
-
-## Publishing Order
+### Publishing Order
 
 Track B before Track A. Track A articles cite data that only exists after the setups are done. Recommended sequence: Setup-A → Article-2 → Setup-B → Setup-C → Setup-D (Article-3) → Setup-E → Setup-F (Article-4) → Article-5.
 
 Article-1 (The Map) can publish first as it requires no setup data.
 
----
-
-## Session Notes
-
-After each working session, update or create `session-notes/YYYY-MM-DD.md` — a dated log entry. Keep `session-notes/Session-State.md` current — see "Session Protocol" below for what it's for.
-
----
-
-## Guided Setup Rule
+### Guided Setup Rule
 
 When guiding Deepak through a setup session, always describe what each command does in one sentence before presenting the code block. Example:
 
@@ -121,18 +105,10 @@ Never give a bare command without context. Deepak runs all commands himself.
 
 ---
 
-## Response Timestamp
-
-Append a timestamp to the end of every response, no exceptions. Uses the canonical format defined once in `ai-config/AGENTS.md` (italic, with timezone and day name) — don't redefine it here:
-
-`*2026-07-12 14:32 IST (Sunday)*`
-
-This is a footer, not content — keep it on its own line, separated by a blank line.
-
----
-
 ## Session Protocol
 
 Uses the ai-config session protocol (see `ai-config/AGENTS.md` → "Session Protocol"). State file: `session-notes/Session-State.md`. Naming prefix: `FromChatbotToPersonalAI`.
 
-**Extra step on top of the template:** when a session gets a name, create `session-notes/YYYY-MM-DD.md` with that name as the first line and today's date as the timestamp — this repo's own history record, in addition to the template's generic steps.
+**Extra steps on top of the template:**
+- After each working session, update or create `session-notes/YYYY-MM-DD.md` — a dated log entry, in addition to `Session-State.md`.
+- When a session gets a name, create that dated log file with the name as its first line and today's date as the timestamp.
